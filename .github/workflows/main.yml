@@ -1,0 +1,21 @@
+name: Deploy static site
+
+on:
+  push:
+    branches:
+      - main   # your single branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # If you don’t use npm build tools, skip install/build
+      # Just deploy raw HTML/CSS/JS files
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./   # root folder with your index.html
